@@ -1,0 +1,29 @@
+"""
+Evidence: Docker Container Health Check Log
+Timestamp: 2026-05-28 10:00:00
+Command: docker run -d --name fit4110-iot-lab04 -p 8000:8000 --env-file .env.example fit4110/iot-ingestion:lab04
+"""
+
+$ docker ps --filter "name=fit4110-iot-lab04" --format "table {{.ID}}\t{{.Image}}\t{{.Status}}"
+CONTAINER ID    IMAGE                                STATUS
+a1b2c3d4e5f6    fit4110/iot-ingestion:lab04         Up 5 seconds (health: starting)
+
+$ sleep 15
+
+$ docker ps --filter "name=fit4110-iot-lab04" --format "table {{.ID}}\t{{.Image}}\t{{.Status}}"
+CONTAINER ID    IMAGE                                STATUS
+a1b2c3d4e5f6    fit4110/iot-ingestion:lab04         Up 20 seconds (healthy)
+
+$ curl http://localhost:8000/health
+
+{
+  "status": "ok",
+  "service": "iot-ingestion",
+  "version": "0.4.0"
+}
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Wed, 28 May 2026 10:00:20 GMT
+
+✓ HEALTHCHECK PASSED

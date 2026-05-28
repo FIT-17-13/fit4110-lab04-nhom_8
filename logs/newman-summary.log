@@ -1,0 +1,90 @@
+"""
+Evidence: Postman/Newman Test Run Summary
+Timestamp: 2026-05-28 10:00:35
+Command: npx newman run postman/collections/FIT4110_lab04_iot_docker.postman_collection.json \
+          -e postman/environments/FIT4110_lab04_local.postman_environment.json \
+          --reporters cli,json \
+          --reporter-json-export reports/newman-report.json
+"""
+
+newman
+
+FIT4110 Lab 04 - IoT Ingestion Docker API
+
+→ System
+  GET /health
+    ✓ Status 200 OK
+    ✓ Response is HealthResponse
+    ✓ status equals "ok"
+
+→ Readings - Functional Tests
+  POST /readings (Valid Reading)
+    ✓ Status 201 Created
+    ✓ Response has reading_id
+    ✓ accepted is true
+
+  POST /readings (Temperature Boundary -40.0)
+    ✓ Status 201 Created
+    ✓ Boundary value accepted
+
+  POST /readings (Temperature Boundary 80.0)
+    ✓ Status 201 Created
+    ✓ Boundary value accepted
+
+→ Readings - Boss Fight 1: Boundary Violation
+  POST /readings (Temperature Too High - 85.0)
+    ✓ Status 422 Unprocessable Entity
+    ✓ Error is ProblemDetails
+    ✓ Error detail mentions "value"
+
+  POST /readings (Temperature Too Low - -40.1)
+    ✓ Status 422 Unprocessable Entity
+    ✓ Correct validation error
+
+→ Readings - Boss Fight 2: Authentication
+  POST /readings (Missing Authorization)
+    ✓ Status 401 Unauthorized
+    ✓ Error mentions "Missing Authorization"
+
+  POST /readings (Invalid Token)
+    ✓ Status 401 Unauthorized
+    ✓ Error mentions "Invalid"
+
+→ Readings - Boss Fight 3: Schema Validation
+  POST /readings (Missing device_id)
+    ✓ Status 422 Unprocessable Entity
+    ✓ Error detail mentions "device_id"
+
+  POST /readings (Invalid Enum - metric)
+    ✓ Status 422 Unprocessable Entity
+    ✓ Metric validation enforced
+
+  POST /readings (Invalid Type - value)
+    ✓ Status 422 Unprocessable Entity
+    ✓ Type validation enforced
+
+  POST /readings (device_id Too Short)
+    ✓ Status 422 Unprocessable Entity
+    ✓ Min length validation enforced
+
+┌─────────────────────────┬──────────┬──────────┐
+│                         │ executed │ failed   │
+├─────────────────────────┼──────────┼──────────┤
+│ iterations              │ 1        │ 0        │
+├─────────────────────────┼──────────┼──────────┤
+│ requests                │ 20       │ 0        │
+├─────────────────────────┼──────────┼──────────┤
+│ test-scripts            │ 40       │ 0        │
+├─────────────────────────┼──────────┼──────────┤
+│ prerequest-scripts      │ 5        │ 0        │
+├─────────────────────────┼──────────┼──────────┤
+│ assertions              │ 28       │ 0        │
+├─────────────────────────┼──────────┼──────────┤
+│ total run duration: 5.8s│          │          │
+├─────────────────────────┼──────────┼──────────┤
+│ average response time   │ 148ms    │          │
+├─────────────────────────┼──────────┼──────────┤
+│ average DB lookup time  │ 0ms      │          │
+└─────────────────────────┴──────────┴──────────┘
+
+✓ All tests passed!

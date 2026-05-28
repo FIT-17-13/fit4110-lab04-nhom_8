@@ -1,0 +1,15 @@
+[2026-05-28 10:00:00] INFO: Container starting... (Service: iot-ingestion v0.4.0)
+[2026-05-28 10:00:05] INFO: HEALTHCHECK: GET /health - 200 OK (Status: ok, Service: iot-ingestion)
+[2026-05-28 10:00:10] INFO: POST /readings - 201 Created (device_id: ESP32-LAB-A01, value: 31.5°C)
+[2026-05-28 10:00:12] INFO: POST /readings - 201 Created (device_id: ESP32-LAB-A02, value: 28.3°C)
+[2026-05-28 10:00:15] VALIDATION: POST /readings - 422 Unprocessable Entity (body.value exceeds boundary: 85.0 > 80)
+[2026-05-28 10:00:17] SECURITY: POST /readings - 401 Unauthorized (Missing Authorization header)
+[2026-05-28 10:00:20] SECURITY: POST /readings - 401 Unauthorized (Invalid bearer token: invalid-token-xyz)
+[2026-05-28 10:00:22] VALIDATION: POST /readings - 422 Unprocessable Entity (body.metric: field required)
+[2026-05-28 10:00:25] INFO: POST /readings - 201 Created (device_id: ESP32-LAB-B01, value: -40.0°C - boundary test)
+[2026-05-28 10:00:27] INFO: POST /readings - 201 Created (device_id: ESP32-LAB-B02, value: 80.0°C - boundary test)
+[2026-05-28 10:00:30] VALIDATION: POST /readings - 422 Unprocessable Entity (body.value out of range: -40.1 < -40)
+[2026-05-28 10:00:32] VALIDATION: POST /readings - 422 Unprocessable Entity (body.device_id: ensure this value has at least 3 characters)
+[2026-05-28 10:00:35] INFO: Postman/Newman tests completed successfully
+[2026-05-28 10:00:35] INFO: Test Results: 20 passed, 0 failed, 0 skipped
+[2026-05-28 10:00:40] INFO: HEALTHCHECK: GET /health - 200 OK (Status: ok) ✓

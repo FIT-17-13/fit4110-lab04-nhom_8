@@ -14,6 +14,33 @@ mock:
 test-mock:
 	npm run test:mock
 
+pytest:
+	python -m pytest tests/ -v
+
+pytest-verbose:
+	python -m pytest tests/ -v -s
+
+test-health:
+	python -m pytest tests/test_health.py -v
+
+test-functional:
+	python -m pytest tests/test_functional.py -v
+
+test-boss-fight-1:
+	python -m pytest tests/test_boss_fight_1_boundary.py -v
+
+test-boss-fight-2:
+	python -m pytest tests/test_boss_fight_2_auth.py -v
+
+test-boss-fight-3:
+	python -m pytest tests/test_boss_fight_3_schema.py -v
+
+test-integration:
+	python -m pytest tests/test_integration.py -v
+
+test-all:
+	python -m pytest tests/ -v --tb=short
+
 build:
 	docker build -t $(IMAGE_NAME) .
 

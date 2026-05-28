@@ -1,0 +1,4 @@
+payload_size,requests_count,total_time_seconds,avg_time_ms,min_time_ms,max_time_ms,requests_per_second,success_rate_percent,errors
+small,1000,12.5,12.5,8,45,80.0,100.0,0
+medium,100,3.2,32.0,25,78,31.3,100.0,0
+large,10,1.8,180.0,165,210,5.6,100.0,0

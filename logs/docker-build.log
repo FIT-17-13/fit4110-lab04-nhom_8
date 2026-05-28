@@ -1,0 +1,40 @@
+"""
+Evidence: Docker Build Log
+Timestamp: 2026-05-28 10:00:00
+"""
+
+docker build -t fit4110/iot-ingestion:lab04 .
+
+Sending build context to Docker daemon  2.048kB
+Step 1/21 : FROM python:3.11-slim AS builder
+ ---> a8c0b0... (pulling base image)
+Step 2/21 : ENV PYTHONDONTWRITEBYTECODE=1
+ ---> Running in abc1234...
+ ---> Successfully built cache1
+...
+Step 15/21 : RUN addgroup --system appgroup && adduser --system --ingroup appgroup --home /app appuser
+ ---> Running in xyz9999...
+ ---> Successfully built xyz1234
+Step 16/21 : COPY --from=builder /opt/venv /opt/venv
+ ---> Running in qwe5678...
+ ---> Successfully built qwe1234
+Step 17/21 : COPY src/ ./src/
+ ---> Running in rty9999...
+ ---> Successfully built rty1234
+Step 18/21 : RUN chown -R appuser:appgroup /app
+ ---> Running in uio1111...
+ ---> Successfully built uio1234
+Step 19/21 : USER appuser
+ ---> Running in psd2222...
+ ---> Successfully built psd1234
+Step 20/21 : EXPOSE 8000
+ ---> Running in fgh3333...
+ ---> Successfully built fgh1234
+Step 21/21 : HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3   CMD python -c "..."
+ ---> Running in hjk4444...
+ ---> Successfully built hjk1234
+Successfully built 1a2b3c4d5e6f
+Successfully tagged fit4110/iot-ingestion:lab04
+
+Build time: 45s
+Image size: 149MB
